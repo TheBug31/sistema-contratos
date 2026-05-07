@@ -1,0 +1,77 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Control Contratos API",
+    "version": "1.0.0",
+    "description": "Documentación de la API REST para el sistema de control de contratos."
+  },
+  "servers": [
+    {
+      "url": "{{baseUrl}}/api",
+      "description": "Servidor local"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Iniciar sesión",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "password": { "type": "string" }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Token generado" },
+          "401": { "description": "Credenciales incorrectas" }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "summary": "Cerrar sesión",
+        "security": [{"sanctum": []}],
+        "responses": {
+          "200": { "description": "Sesión cerrada" }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Listar usuarios",
+        "security": [{"sanctum": []}],
+        "responses": {"200": {"description": "Lista de usuarios"}}
+      },
+      "post": {
+        "summary": "Crear usuario",
+        "security": [{"sanctum": []}],
+        "requestBody": {"required": true},
+        "responses": {"201": {"description": "Usuario creado"}}
+      }
+    },
+    "/users/{id}": {
+      "get": {"summary": "Ver usuario","security":[{"sanctum":[]}],"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"}}]},
+      "put": {"summary":"Actualizar usuario","security":[{"sanctum":[]}],"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"}}]},
+      "delete": {"summary":"Eliminar usuario","security":[{"sanctum":[]}],"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"}}],"responses":{"200":{"description":"Usuario eliminado"}}}
+    },
+    "/contracts/assign": {"post":{"summary":"Asignar contratos","security":[{"sanctum":[]}]}},
+    "/contracts/{contract}/status": {"put":{"summary":"Cambiar estado","security":[{"sanctum":[]}]}},
+    "/contracts/{contract}/reassign": {"put":{"summary":"Reasignar contrato","security":[{"sanctum":[]}]}},
+    "/contracts/{contract}/history": {"get":{"summary":"Historial de estado","security":[{"sanctum":[]}]}},
+    "/dashboard": {"get":{"summary":"Dashboard resumen","security":[{"sanctum":[]}]}}
+  },
+  "components": {
+    "securitySchemes": {
+      "sanctum": {"type":"apiKey","name":"X-XSRF-TOKEN","in":"cookie"}
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# Laravel
+/vendor
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+
+# Laravel specific
+laravel/vendor
+laravel/node_modules
+laravel/public/hot
+laravel/public/storage
+laravel/storage/*.key
+laravel/.env
+laravel/.env.backup
+laravel.phpunit.result.cache
+laravel/Homestead.json
+laravel/Homestead.yaml
+laravel/npm-debug.log
+laravel/yarn-error.log
+laravel/database/database.sqlite
+laravel/storage/logs/*.laravel.log
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Misc
+composer.phar
